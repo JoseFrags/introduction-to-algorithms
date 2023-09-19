@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentence Analysis</title>
+</head>
+<body>
+    <h1>Sentence Analysis</h1>
+    <textarea id="inputSentence" placeholder="Enter a sentence (ending with a period)"></textarea>
+    <button onclick="analyzeSentence()">Analyze</button>
+    <p id="result"></p>
+
+    <script>
+        function analyzeSentence() {
+            // Get the input sentence from the textarea
+            var sentence = document.getElementById("inputSentence").value.trim();
+
+            // Check if the sentence ends with a period
+            if (sentence.endsWith('.')) {
+                // Remove the period before analysis
+                sentence = sentence.slice(0, -1);
+
+                // Initialize counters
+                var length = 0;
+                var wordCount = 0;
+                var vowelCount = 0;
+
+                // Define a set of vowels for easy checking
+                var vowels = new Set("AEIOUaeiou");
+
+                // Loop through each character in the sentence
+                for (var i = 0; i < sentence.length; i++) {
+                    // Increment the length counter for each character
+                    length++;
+
+                    // Check if the character is a space (indicating a word boundary)
+                    if (sentence[i] === ' ') {
+                        wordCount++;
+                    }
+
+                    // Check if the character is a vowel
+                    if (vowels.has(sentence[i])) {
+                        vowelCount++;
+                    }
+                }
+
+                // Add 1 to the word count for the last word
+                wordCount++;
+
+                // Display the results
+                var resultText = "Sentence Length: " + length + "<br>";
+                resultText += "Number of Words: " + wordCount + "<br>";
+                resultText += "Number of Vowels: " + vowelCount;
+                document.getElementById("result").innerHTML = resultText;
+            } else {
+                // Display an error message if the sentence doesn't end with a period
+                document.getElementById("result").innerHTML = "Please enter a sentence ending with a period.";
+            }
+        }
+    </script>
+</body>
+</html>
